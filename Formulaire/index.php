@@ -71,7 +71,6 @@ try {
         $birthdate=$_POST['birthdate'];
         $email=$_POST['email'] ;
         $phone=$_POST['phone'] ;
-        echo 'Salut '. $name.'de '. $birthdate.'<br/>Bienvenue sur mon site !';
         $bdd->exec("INSERT INTO `users` (`id`, `name`, `birthdate`, `email`, `phone`) VALUES (NULL, '$name', '$birthdate', '$email', '$phone')");
     }
     ?>
