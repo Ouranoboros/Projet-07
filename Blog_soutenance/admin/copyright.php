@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // Inclure le fichier header.php
 include 'includes/header.php';
 // Inclure le fichier sidebar.php
@@ -18,16 +18,27 @@ include 'includes/sidebar.php';
         if ($copyright="");{
         //         Alors
         //             Afficher un message d'erreur
-            echo
+            echo "<script>alert('Pas de copyright !');</script>";
         //         Sinon
         }
         else;{
+            $copyright = $query([UPDATE FROM])
         //             Mettre à jour le copyright dans la table footer
         //             Si le copyright est mis à jour
-        //                 Alors
-        //                     Afficher un message de succès
+            if ($copyright!="");{
+
+                //                 Alors
+                //                     Afficher un message de succès
+
+
+                echo "<script>alert('succes !');</script>";
+            }
+            else;{
         //                 Sinon
         //                     Afficher un message d'erreur
+
+        echo "<script>alert('echec !');</script>";
+    }
         }
         ?>
 
