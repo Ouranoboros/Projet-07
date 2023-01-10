@@ -54,7 +54,7 @@ $format = new Format();
                
                 $result = $db->select($query);
             //     Tant que les données sont récupérées
-            
+
                 if ($result != false) {
                     $value = mysqli_fetch_array($result);
                     $row = mysqli_num_rows($result);
@@ -84,6 +84,7 @@ $format = new Format();
                     echo "<script>alert('Username et mot de passe ne corresponde pas !');</script>";
                 }
             }
+
             ?>
             <form action="" method="post">
                 <h1>Connexion Administrateur</h1>
