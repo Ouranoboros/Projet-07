@@ -1,8 +1,8 @@
-﻿<?php
+<?php
 // Inclure le fichier header.php
-include 'includes/header.php';
+include 'Blog_soutenance/includes/header.php';
 // Inclure le fichier sidebar.php
-include 'includes/sidebar.php';
+include 'Blog_soutenance/includes/sidebar.php';
 ?>
 <div class="grid_10">
     <div class="box round first grid">
@@ -25,21 +25,27 @@ include 'includes/sidebar.php';
                 <tbody>
                     <?php
                     // Récupérer les données de la table post
+                    $query = "SELECT * FROM post";
+                    $requete = $db->select($query);
                     // Tant que les données sont récupérées
+                    while ($donnees = $requete->fetch()) {
                     //     Afficher les données
                     ?>
                     <tr class="odd gradeX">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td><img src="" height="40px" width="80px" alt=""></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td><?php $donnees['id']; ?></td>
+                        <td><?php $donnees['title']; ?></td>
+                        <td><?php $donnees['body']; ?></td>
+                        <td><?php $donnees['category_id']; ?></td>
+                        <td><img src="<?php $donnees['image']; ?>" height="40px" width="80px" alt=""></td>
+                        <td><?php $donnees['author']; ?></td>
+                        <td><?php $donnees['tags']; ?></td>
+                        <td><?php $donnees['date']; ?></td>
                         <td><a href="edit_post.php?edit_postid=">Modifier</a>
                             || <a onclick="return confirm('Etes vous sur de vouloir supprimer ?')" href="delete_post.php?del_postid=">Supprimer</a></td>
                     </tr>
+                    <?php 
+                    }
+                    ?>
                 </tbody>
             </table>
 
@@ -56,6 +62,5 @@ include 'includes/sidebar.php';
 </script>
 <?php
 // Inclure le fichier footer.php
-include 'includes/footer.php';
-
+include 'Blog_soutenance/includes/footer.php';
 ?>
