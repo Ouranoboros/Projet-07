@@ -1,35 +1,25 @@
+
 <?php
+
 // Inclure le fichier Session.php depuis le dossier classes
-require '../classes/Session.php';
-$test= new Session();
-echo "bote";
-
+include '../classes/Session.php';
 // Inclure la session et le checkLogin
-$test ->checkLogin();  
-
+Session::checkLogin();
 ?>
 <?php
 // Inclure le fichier config.php depuis le dossier config
-require '../config/config.php';
-
+include '../config/config.php';
 // Inclure le fichier Database.php depuis le dossier db
-require '../db/Database.php';
-
+include '../db/Database.php';
 // Inclure le fichier format.php depuis le dossier classes
-require '../classes/format.php';
-
+include '../classes/format.php';
 ?>
 
 <?php
 // Inclure la variable $db = new Database();
-
 $db = new Database();
-
-
-
 // Inclure la variable $format = new Format();
 $format = new Format();
-
 ?>
 <!DOCTYPE html>
 
@@ -44,16 +34,37 @@ $format = new Format();
         <section id="content">
             <?php
             // Si la méthode de requête est POST
-            if (isset($_POST["submit"])){
-                echo "l";
-                // Alors
-                //     Récupérer la valeur de username
-                $username = $_POST["username"];
-                //     Récupérer la valeur de password
-                $password = $_POST["password"];
-                $command = $db->query("SELECT * FROM user");
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+                $username = $format->validation($_POST['username']);
+                $password = $format->validation(md5($_POST['password']));
+
+                $username = mysqli_real_escape_string($db->link, $username);
+                $password = mysqli_real_escape_string($db->link, $password);
+
+                $query = "SELECT * FROM user WHERE username = '$username' AND password = '$password'";
+                $result = $db->select($query);
+
+                if ($result != false) {
+                    $value = mysqli_fetch_array($result);
+                    $row = mysqli_num_rows($result);
+
+                    if ($row > 0) {
+                        Session::set("login", true);
+                        Session::set("username", $value['username']);
+                        Session::set("userid", $value['id']);
+                        header('location:index.php');
+                    } else {
+                        echo "<script>alert('No result !');</script>";
+                    }
+                } else {
+                    echo "<script>alert('Username et mot de passe ne corresponde pas !');</script>";
+                }
             }
+
+            // Alors
+            //     Récupérer la valeur de username
+            //     Récupérer la valeur de password
             //     Récupérer les données de la table user
             //     Tant que les données sont récupérées
             //         Récupérer la valeur de username et password
@@ -77,7 +88,7 @@ $format = new Format();
                     <input type="password" placeholder="Mot de passe" required="" name="password" />
                 </div>
                 <div>
-                    <input type="submit" value="Se connecter" name = "submit"/>
+                    <input type="submit" value="Se connecter" name="button" />
                 </div>
             </form><!-- form -->
             <div class="button">
@@ -87,4 +98,13 @@ $format = new Format();
     </div><!-- container -->
 </body>
 
-</html>
+</html> 
+
+
+
+
+
+
+
+            
+
