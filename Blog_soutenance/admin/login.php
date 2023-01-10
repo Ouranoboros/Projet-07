@@ -35,49 +35,69 @@ $format = new Format();
             <?php
             // Si la méthode de requête est POST
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+            // Alors
+            //     Récupérer la valeur de username
                 $username = $format->validation($_POST['username']);
+            //     Récupérer la valeur de password
                 $password = $format->validation(md5($_POST['password']));
 
+
+
+             //    Si username et password sont égaux aux valeurs récupérées
                 $username = mysqli_real_escape_string($db->link, $username);
                 $password = mysqli_real_escape_string($db->link, $password);
 
+            //     Récupérer la valeur de username et password
                 $query = "SELECT * FROM user WHERE username = '$username' AND password = '$password'";
+               
+            //     Récupérer les données de la table user
+               
                 $result = $db->select($query);
-
+            //     Tant que les données sont récupérées
+            
                 if ($result != false) {
                     $value = mysqli_fetch_array($result);
                     $row = mysqli_num_rows($result);
 
                     if ($row > 0) {
+            //             Alors
+            //      Définir la session login
                         Session::set("login", true);
+            //      Définir la session username
                         Session::set("username", $value['username']);
+            //      Définir la session userid                       
                         Session::set("userid", $value['id']);
+            //      Rediriger vers index.php
                         header('location:index.php');
-                    } else {
+                    }
+                    
+            //      Sinon
+            else
+            {
+            //      Afficher un message d'erreur
                         echo "<script>alert('No result !');</script>";
                     }
-                } else {
+                } 
+            //     Sinon
+                else {            
+            //         Afficher un message d'erreur
                     echo "<script>alert('Username et mot de passe ne corresponde pas !');</script>";
                 }
             }
 
-            // Alors
-            //     Récupérer la valeur de username
-            //     Récupérer la valeur de password
-            //     Récupérer les données de la table user
-            //     Tant que les données sont récupérées
-            //         Récupérer la valeur de username et password
-            //         Si username et password sont égaux aux valeurs récupérées
-            //             Alors
-            //                 Définir la session login
-            //                 Définir la session username
-            //                 Définir la session userid
-            //                 Rediriger vers index.php
-            //         Sinon
-            //             Afficher un message d'erreur
-            //     Sinon
-            //         Afficher un message d'erreur
+
+
+
+
+
+
+
+     
+
+
+
+
+
             ?>
             <form action="" method="post">
                 <h1>Connexion Administrateur</h1>
