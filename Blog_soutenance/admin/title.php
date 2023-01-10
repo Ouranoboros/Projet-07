@@ -26,10 +26,19 @@ include 'includes/sidebar.php';
         <!--            For Update website Title & Logo-->
         <?php
         // Si la méthode de requête est POST
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Alors
         //     Récupérer la valeur de title
+        $title = $format->validation($_POST['title']);
+
         //     Récupérer la valeur de logo
+        $logo = $format->validation($_POST['logo']);
+
         //     Si title est vide
+        if ($title = "")
+        {
+
+        }
         //         Alors
         //             Afficher un message d'erreur
         //         Sinon
@@ -59,6 +68,7 @@ include 'includes/sidebar.php';
         //                                 Afficher un message d'erreur
         //                     Sinon
         //                         Afficher un message d'erreur
+        }
         ?>
 
 
@@ -107,6 +117,7 @@ include 'includes/sidebar.php';
 <div class="clear">
 </div>
 </div>
+
 <?php
 // Inclure le fichier footer.php
 include 'includes/footer.php';

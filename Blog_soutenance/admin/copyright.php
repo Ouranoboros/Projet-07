@@ -10,18 +10,25 @@ include 'includes/sidebar.php';
         <!--   For update copyright media -->
         <?php
         // Si la méthode de requête est POST
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Alors
         //     Récupérer la valeur de copyright
+        $copyright = $format->validation($_POST['copyright']);
         //     Si copyright est vide
+        if ($copyright="");{
         //         Alors
         //             Afficher un message d'erreur
+            echo
         //         Sinon
+        }
+        else;{
         //             Mettre à jour le copyright dans la table footer
         //             Si le copyright est mis à jour
         //                 Alors
         //                     Afficher un message de succès
         //                 Sinon
         //                     Afficher un message d'erreur
+        }
         ?>
 
         <div class="block copyblock">
@@ -30,6 +37,7 @@ include 'includes/sidebar.php';
             // Récupérer le copyright de la table footer
             // Tant que le copyright est récupéré
             //     Afficher le copyright
+    }
             ?>
             <form action="" method="post">
                 <table class="form">

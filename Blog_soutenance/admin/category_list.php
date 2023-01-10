@@ -14,21 +14,13 @@ include 'includes/sidebar.php';
             $delete_data = $db->delete($delete_quey);
             if ($delete_data) {   //     Si la catégorie est supprimée  // Alors
                 echo "<span style='color:green;font-size:18px;'>
-                Catégorie supprimée avec succès</span>";
+                Catégorie supprimée avec succès</span>";  //  Afficher un message de succès
             } else {
-                echo "<span style='color:red;front-size:18px;'>Catégorie non supprimée</span>";
+                echo "<span style='color:red;front-size:18px;'>Catégorie non supprimée</span>";  //  Afficher un message d'erreur
         
             }
         }
-        // Si la méthode de requête est GET
-        // Alors
-        //     Récupérer la valeur de delid
-        //     Supprimer la catégorie de la table category
-        //     Si la catégorie est supprimée
-        //         Alors
-        //             Afficher un message de succès
-        //         Sinon
-        //             Afficher un message d'erreur
+        
         ?>
         <div class="block">
             <table class="data display datatable" id="example">
@@ -41,15 +33,32 @@ include 'includes/sidebar.php';
                 </thead>
                 <tbody>
                     <?php
+                    $query = "SELECT * FROM  category ORDER BY category_id DESC ";
+                    $category = $db->select($query);
+                    if ($category) 
+                        $i = 0;
+                        while ($result = $category->fetch_assoc()) {
+                            $i++
+                        }
+                ?>
+                    
+                            
+
+                                    
+
+                        
+                    
                     // Récupérer toutes les catégories de la table category
                     // Tant que la catégorie est récupérée
                     //     Afficher la catégorie
                     ?>
                     <tr class="odd gradeX">
-                        <td></td>
-                        <td></td>
-                        <td><a href="edit_category.php?catid=">Modifier</a>
-                            || <a onclick="return confirm('Êtes-vous sûr de vouloir supprimer?')" href="">Supprimer</a></td>
+                        <td><?php echo $i; ?></td>
+                            
+                
+                        <td><?php echo $result['name']; ?></td>
+                        <td><a href="edit_category.php?catid=<?php echo $result['category_id']; ?>">Modifier</a>
+                            || <a onclick="return confirm('Êtes-vous sûr de vouloir supprimer?')" href="?delid=<?php echo $result['category_id']; ?>">Supprimer</a></td>
                     </tr>
                 </tbody>
             </table>
@@ -69,3 +78,4 @@ include 'includes/sidebar.php';
 
 <?php
 include 'includes/footer.php'; // Inclure le fichier footer.php
+?>

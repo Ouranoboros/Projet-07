@@ -24,8 +24,11 @@ include 'includes/sidebar.php';
             <!--                Category update query-->
             <?php
             // Si la méthode de requête est POST
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Alors
             //     Récupérer la valeur de name
+            $name = $format->validation($_POST['name']);
+            
             //     Si name est vide
             //         Alors
             //             Afficher un message d'erreur
@@ -42,6 +45,7 @@ include 'includes/sidebar.php';
             // Récupérer les données de la table category
             // Tant que les données sont récupérées
             //     Afficher les données
+            }
             ?>
             <form method="post">
                 <table class="form">
