@@ -84,20 +84,6 @@ $format = new Format();
                     echo "<script>alert('Username et mot de passe ne corresponde pas !');</script>";
                 }
             }
-
-
-
-
-
-
-
-
-     
-
-
-
-
-
             ?>
             <form action="" method="post">
                 <h1>Connexion Administrateur</h1>
@@ -119,12 +105,3 @@ $format = new Format();
 </body>
 
 </html> 
-
-
-
-
-
-
-
-            
-
