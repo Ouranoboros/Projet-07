@@ -2,8 +2,8 @@
 // Inclure le fichier header.php
 include 'includes/header.php';
 ?>
-// Inclure le fichier sidebar.php
 <?php
+// Inclure le fichier sidebar.php
 include 'includes/sidebar.php';
 ?>
 <div class="grid_10">
