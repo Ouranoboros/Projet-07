@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // Inclure le fichier header.php
 include 'includes/header.php';
 // Inclure le fichier sidebar.php
@@ -8,6 +8,18 @@ include 'includes/sidebar.php';
     <div class="box round first grid">
         <h2>Category List</h2>
         <?php
+        if (isset($_GET['delid'])) {  // Si la méthode de requête est GET
+            $delid = $_GET['delid'];  //     Récupérer la valeur de delid
+            $delete_query = "DELETE FROM category WHERE category_id= '$delid'";   //     Supprimer la catégorie de la table category
+            $delete_data = $db->delete($delete_quey);
+            if ($delete_data) {   //     Si la catégorie est supprimée  // Alors
+                echo "<span style='color:green;font-size:18px;'>
+                Catégorie supprimée avec succès</span>";
+            } else {
+                echo "<span style='color:red;front-size:18px;'>Catégorie non supprimée</span>";
+        
+            }
+        }
         // Si la méthode de requête est GET
         // Alors
         //     Récupérer la valeur de delid
@@ -56,6 +68,4 @@ include 'includes/sidebar.php';
 </script>
 
 <?php
-// Inclure le fichier footer.php
-include 'includes/footer.php';
-?>
+include 'includes/footer.php'; // Inclure le fichier footer.php
