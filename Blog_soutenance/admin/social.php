@@ -29,32 +29,79 @@ include 'includes/sidebar.php';
 
         //     Si facebook, github, skype, linkedin ou google est vide
         //         Alors
-        if (empty($facebook or $github or $skype or $linkedin or $google )){
-
-            echo "Un champ est vide attention step bro";
-
-
-
-        }
         //             Afficher un message d'erreur
         //         Sinon
+        // jonathan le roi a dit pas comme ca zinedine if (empty($facebook or $github or $skype or $linkedin or $google )){echo "Un champ est vide attention step bro";
 
+        }
         //             Mettre à jour les médias sociaux dans la table tbl_social
         //             Si les médias sociaux sont mis à jour
         //                 Alors
         //                     Afficher un message de succès
         //                 Sinon
         //                     Afficher un message d'erreur
+        
+         if  ($facebook != NULL) {
+
+             $query = "UPDATE social SET facebook = '$facebook'";
+             $result = $db->update($query);
+         }
+        else{
+        
+         echo "<span style='color:red;font-size:18px;'> - Attention : le champ facebook est vide</span> <br>";
+
+         }
+
+        // pour github
+         if  ($github != NULL) {
+
+            $query = "UPDATE social SET github = '$github'";
+            $result = $db->update($query);
         }
+        else{
+        
+            echo "<span style='color:red;font-size:18px;'> - Attention : le champ github est vide</span> <br>";
+   
+            }
+        // pour skype
+        if  ($skype != NULL) {
+
+            $query = "UPDATE social SET skype = '$skype'";
+            $result = $db->update($query);
+        }
+        else{
+        
+            echo "<span style='color:red;font-size:18px;'> - Attention : le champ skype est vide</span> <br>";
+   
+            }
+        // pour linkedin
+        if  ($linkedin != NULL) {
+
+            $query = "UPDATE social SET linkedin = '$linkedin'";
+            $result = $db->update($query);
+        }
+        else{
+        
+            echo "<span style='color:red;font-size:18px;'> - Attention : le champ linkedin est vide</span> <br>";
+   
+            }
+
+
+        // pour google
+        if  ($google != NULL) {
+
+            $query = "UPDATE social SET google = '$google'";
+            $result = $db->update($query);
+        }
+        else{
+        
+            echo "<span style='color:red;font-size:18px;'> - Attention : le champ google est vide</span> <br>";
+   
+            }
+
         ?>
 
         <div class="block">
-            <!--     For show social link from database-->
-            <?php
-            // Récupérer les données de la table tbl_social
-            // Tant que les données sont récupérées
-            //     Afficher les données
-            ?>
             <form action="" method="post">
                 <table class="form">
                     <tr>
