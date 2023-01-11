@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // Inclure le fichier header.php
 include 'includes/header.php';
 // Inclure le fichier sidebar.php
@@ -39,7 +39,6 @@ include 'includes/sidebar.php';
         $logo_name = $logo['name'];
         $logo_size = $logo['size']; 
         $logo_type = $logo['type']; 
-        echo "<script>alert('le ogo_name')</script>";
 
         //     Si title est vide
         //$logo = gettype($logo);
@@ -49,7 +48,8 @@ include 'includes/sidebar.php';
             {
                 //         Alors
                 //             Afficher un message d'erreur
-                echo "<script>alert('Zebi c'est pas bon');</script>";
+                echo "<span style='color:red;font-size:18px;'> - Attention : Vous n'avez pas mit de titre</span> <br>";
+   
             }
             //         Sinon
             else {
@@ -64,22 +64,23 @@ include 'includes/sidebar.php';
                     //                             Afficher un message de succès
                     $db = $db->update($query);
                     if ($db){
-                        echo "<script>alert('Titre modifié avec succès !')</script>";
+                        echo "<span style='color:red;font-size:18px;'> - Titre modifié avec succès !</span> <br>";
+   
                     } else {
                         //                         Sinon
                         //                             Afficher un message d'erreur
-                        echo "<script>alert('Non')</script>";
+                        echo "alert('Non')";
                     }    
 
                 }  else{
                         //                     Si l'extension du logo est permise
-                        echo "<script>alert('logo_size')</script>";
+                        echo "('logo_size')";
 
                         if (getimagesize($logo['tmp_name']))
                         {
                             //                         Alors
                             //                             Si la taille du logo est inférieure à 1 Mo
-                            echo "<script>alert('$logo_size')</script>";
+                            echo "('$logo_size')";
             
                             //                                 Alors
             
