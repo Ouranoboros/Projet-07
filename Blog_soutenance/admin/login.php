@@ -70,13 +70,6 @@ $format = new Format();
             //      Rediriger vers index.php
                         header('location:index.php');
                     }
-                    
-            //      Sinon
-            else
-            {
-            //      Afficher un message d'erreur
-                        echo "<script>alert('No result !');</script>";
-                    }
                 } 
             //     Sinon
                 else {            
