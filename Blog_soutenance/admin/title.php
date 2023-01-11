@@ -56,10 +56,10 @@ include 'includes/sidebar.php';
                 //             Si logo est vide
                 if ($logo_name == '')
                 {
-                    //                 Alors
-                    //                     Mettre à jour le titre dans la table title
+                    //          Alors
+                    //          Mettre à jour le titre dans la table title
                     $query = "UPDATE title SET title = '$title'";
-                    //                     Si le titre est mis à jour
+                    //          Si le titre est mis à jour
                     //                         Alors
                     //                             Afficher un message de succès
                     $db = $db->update($query);
