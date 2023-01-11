@@ -27,7 +27,6 @@ include 'includes/sidebar.php';
             
             //      Si le copyright est mis à jour
                 if(empty($copyright)!=true) {
-
         } else{
             //         Alors
             //          Afficher un message d'erreur
@@ -41,11 +40,14 @@ include 'includes/sidebar.php';
             <!--    For show social link from database-->
             <?php
             // Récupérer le copyright de la table footer
-            $copy = $query
+            $query = "SELECT copyright FROM footer";
+            $requete = $db->select($query);
+            $requete = $requete->fetch_assoc();
             // Tant que le copyright est récupéré
-
             //     Afficher le copyright
-
+            if ($requete) {
+                echo "Le copyright de la page est : ".$requete["copyright"] ;
+            } 
     
             ?>
             <form action="" method="post">
