@@ -15,30 +15,34 @@ include 'includes/sidebar.php';
         //     Récupérer la valeur de copyright
         $copyright = $format->validation($_POST['copyright']);
         //     Si copyright est vide
-        if ($copyright="");{
+        if ($copyright=""){
         //         Alors
         //             Afficher un message d'erreur
-            echo "<script>alert('Pas de copyright !');</script>";
+            echo  "<script>alert('ERROR !');</script>";
         //         Sinon
         }
-        else;{
-            $copyright = $query([UPDATE FROM])
-        //             Mettre à jour le copyright dans la table footer
-        //             Si le copyright est mis à jour
-            if ($copyright!="");{
+        else{
+            $query = "UPDATE footer SET copyright = '$copyright'";
+            $db->update($query);
 
-                //                 Alors
-                //                     Afficher un message de succès
+        //           Mettre à jour le copyright dans la table footer
+        //           Si le copyright est mis à jour
 
 
-                echo "<script>alert('succes !');</script>";
-            }
-            else;{
-        //                 Sinon
-        //                     Afficher un message d'erreur
-
-        echo "<script>alert('echec !');</script>";
-    }
+        if(query($db)!=0) {
+            
+        //          Sinon
+        //          Afficher un message d'erreur
+            
+            echo "marche pas";
+            
+            
+        }
+        else{
+        //         Alors
+        //         Afficher un message de succès
+            echo" marche bien";
+        }
         }
         ?>
 
