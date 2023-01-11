@@ -14,22 +14,38 @@ include 'includes/sidebar.php';
         <!--   For update social media -->
         <?php
         // Si la méthode de requête est POST
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Alors
         //     Récupérer la valeur de facebook
+        $facebook = $format->validation($_POST['facebook']);
         //     Récupérer la valeur de github
+        $github = $format->validation($_POST['github']);
         //     Récupérer la valeur de skype
+        $skype = $format->validation($_POST['skype']);
         //     Récupérer la valeur de linkedin
+        $linkedin = $format->validation($_POST['linkedin']);
         //     Récupérer la valeur de google
+        $google = $format->validation($_POST['google']);
+
         //     Si facebook, github, skype, linkedin ou google est vide
         //         Alors
+        if (empty($facebook or $github or $skype or $linkedin or $google )){
+
+            echo "Un champ est vide attention step bro";
+
+
+
+        }
         //             Afficher un message d'erreur
         //         Sinon
+
         //             Mettre à jour les médias sociaux dans la table tbl_social
         //             Si les médias sociaux sont mis à jour
         //                 Alors
         //                     Afficher un message de succès
         //                 Sinon
         //                     Afficher un message d'erreur
+        }
         ?>
 
         <div class="block">

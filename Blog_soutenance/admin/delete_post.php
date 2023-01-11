@@ -7,25 +7,40 @@ include 'includes/sidebar.php';
 
 <?php
 // Inclure la variable $db = new Database();
+$db = new Database();
 
-// Si la méthode de requête est GET
-// Alors
-//     Récupérer la valeur de del_postid
-//     Si del_postid est vide
+
+if (isset($_GET['del_postid'])) {    // Si la méthode de requête est GET
+    $del_postid = $_GET['del_postid'];  //   Récupérer la valeur de del_postid
+}
+if ($del_postid == '0')  // Si del_postid est vide 
 //         Alors
-//             Rediriger vers post_list.php
+header("Location: .$post_list.php"); // Rediriger vers post_list.php
+die();
 //     Sinon
-//         Récupérer la valeur de delete_id
-//         Récupérer les données de la table post
-//         Tant que les données sont récupérées
-//             Récupérer la valeur de imglink
-//             Supprimer l'image
-//         Supprimer les données de la table post
-//         Si les données sont supprimées
-//             Alors
-//                 Afficher un message de succès
-//                 Rediriger vers post_list.php
-//             Sinon
-//                 Afficher un message d'erreur
-//                 Rediriger vers post_list.php
+
+if (isset($_GET['delete_id'])) {  
+    $delete_id = $_GET['delete_id'];  //  Récupérer la valeur de delete_id
+}
+//   Récupérer les données de la table post
+$query = "SELECT * FROM post";
+$requete = $db->select($query);
+//   Tant que les données sont récupérées
+while ($donnees = $requete->fetch()) {
+
+}
+$imglink = $_GET['imglink']; //   Récupérer la valeur de imglink
+//   Supprimer l'image
+// "DELETE FROM nom de table"  ->Supprimer les données de la table post
+// if // Si les données sont supprimées
+//   Alors
+echo "<span style='color:red;front-size:18px;'>Données supprimées</span>";  //   Afficher un message de succès
+header("Location: .$post_list.php");                  //    Rediriger vers post_list.php
+die();
+// else //   Sinon
+echo  "<span style='color:red;front-size:18px;'>ERROR !</span>";  //    Afficher un message d'erreur
+
+
+header("Location: .$post_list.php");   //  Rediriger vers post_list.php
+die();
 ?>

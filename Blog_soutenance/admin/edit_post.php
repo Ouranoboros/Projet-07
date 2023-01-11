@@ -8,6 +8,9 @@ include 'includes/sidebar.php';
 // Si la méthode de requête est GET
 // Alors
 //     Récupérer la valeur de edit_postid
+if (isset($_GET['edit_postid'])) {  
+    $edit_postid = $_GET['edit_postid'];
+}  
 //     Si edit_postid est vide
 //         Alors
 //             Rediriger vers post_list.php

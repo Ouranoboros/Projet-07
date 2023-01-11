@@ -54,7 +54,6 @@ $format = new Format();
                
                 $result = $db->select($query);
             //     Tant que les données sont récupérées
-
                 if ($result != false) {
                     $value = mysqli_fetch_array($result);
                     $row = mysqli_num_rows($result);

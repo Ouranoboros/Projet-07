@@ -30,6 +30,7 @@ include 'includes/sidebar.php';
             $name = $format->validation($_POST['name']);
             
             //     Si name est vide
+
             //         Alors
             //             Afficher un message d'erreur
             //         Sinon

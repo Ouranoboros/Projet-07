@@ -25,36 +25,72 @@ include 'includes/sidebar.php';
         <h2>Mettre à jour le titre et la description du site</h2>
         <!--            For Update website Title & Logo-->
         <?php
+
         // Si la méthode de requête est POST
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Alors
         //     Récupérer la valeur de title
         $title = $format->validation($_POST['title']);
-
+        //echo "<script>alert('$title');</script>";
         //     Récupérer la valeur de logo
-        $logo = $format->validation($_POST['logo']);
+        
+        $logo = ($_FILES['logo']);
+        $logo_name = $logo['name'];
+        $logo_size = $logo['size']; 
+        $logo_type = $logo['type']; 
+        echo "<script>alert('le ogo_name')</script>";
 
         //     Si title est vide
-        if ($title = "")
-        {
+        //$logo = gettype($logo);
+        //echo "<script>alert('$logo')</script>";
 
-        }
-        //         Alors
-        //             Afficher un message d'erreur
-        //         Sinon
-        //             Si logo est vide
-        //                 Alors
-        //                     Mettre à jour le titre dans la table title_slogan
-        //                     Si le titre est mis à jour
-        //                         Alors
-        //                             Afficher un message de succès
-        //                         Sinon
-        //                             Afficher un message d'erreur
+            if ($title == '')
+            {
+                //         Alors
+                //             Afficher un message d'erreur
+                echo "<script>alert('Zebi c'est pas bon');</script>";
+            }
+            //         Sinon
+            else {
+                //             Si logo est vide
+                if ($logo_name == '')
+                {
+                    //                 Alors
+                    //                     Mettre à jour le titre dans la table title
+                    $query = "UPDATE title SET title = '$title'";
+                    //                     Si le titre est mis à jour
+                    //                         Alors
+                    //                             Afficher un message de succès
+                    $db = $db->update($query);
+                    if ($db){
+                        echo "<script>alert('Titre modifié avec succès !')</script>";
+                    } else {
+                        //                         Sinon
+                        //                             Afficher un message d'erreur
+                        echo "<script>alert('Non')</script>";
+                    }    
+
+                }  else{
+                        //                     Si l'extension du logo est permise
+                        echo "<script>alert('logo_size')</script>";
+
+                        if (getimagesize($logo['tmp_name']))
+                        {
+                            //                         Alors
+                            //                             Si la taille du logo est inférieure à 1 Mo
+                            echo "<script>alert('$logo_size')</script>";
+            
+                            //                                 Alors
+            
+                        }
+                    }
+                    
+                
+            }
+        
         //                 Sinon
-        //                     Si l'extension du logo est permise
-        //                         Alors
-        //                             Si la taille du logo est inférieure à 1 Mo
-        //                                 Alors
+    }
         //                                     Déplacer le logo dans le dossier uploads
         //                                     Mettre à jour le titre et le logo dans la table title_slogan
         //                                     Si le titre et le logo sont mis à jour
@@ -68,7 +104,7 @@ include 'includes/sidebar.php';
         //                                 Afficher un message d'erreur
         //                     Sinon
         //                         Afficher un message d'erreur
-        }
+        
         ?>
 
 

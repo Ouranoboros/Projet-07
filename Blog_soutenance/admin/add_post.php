@@ -10,23 +10,47 @@ include 'includes/sidebar.php';
         <h2>Ajouter un nouveau post</h2>
         <?php
         // Si la méthode de requête est POST
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Alors
         //     Récupérer la valeur de title
+            $title = $format->validation($_POST['title']);
         //     Récupérer la valeur de category_id
+            $category_id = $format->validation($_POST['category_id']);
         //     Récupérer la valeur de author
+            $author = $format->validation($_POST['author']);
         //     Récupérer la valeur de tags
+            $tags = $format->validation($_POST['tags']);
         //     Récupérer la valeur de body
+            $body = $format->validation($_POST['body']);
         //     Récupérer la valeur de image
+            $image = $format->validation($_POST['image']);
+
+
+
+
         //     Si title est vide
+                if ($title == "") {
         //         Alors
         //             Afficher un message d'erreur
+                    echo "<span class='success'> Le titre n'est pas renseigné.</span>";
         //         Sinon
+                 } else {
         //             Insérer le post dans la table post
+                    $query = "INSERT INTO post(title, category_id, author, tags, body, image) VALUES ('$title', '$category_id', '$author', '$tags', '$body', '$image')";
+                    $insert_post = $db->crate($query);
         //             Si le post est inséré
         //                 Alors
         //                     Afficher un message de succès
+                    if ($insert_post) {
+                        echo "<span class='success'> Votre message à été envoyé.</span>";
         //                 Sinon
         //                     Afficher un message d'erreur
+                    } else {
+                        echo "<span class='error'> Votre message n'a pas été envoyé.</span>";
+                    }
+                }
+        }
+
         ?>
         <div class="block">
             <form action="" method="post" enctype="multipart/form-data">
@@ -50,10 +74,17 @@ include 'includes/sidebar.php';
                                 <option>Select Category </option>
                                 <?php
                                 // Récupérer les catégories de la table category
+                                $query = "SELECT * FROM category";
+                                $requete = $db->select($query);
                                 // Tant que les catégories sont récupérées
                                 //     Afficher les catégories dans la liste déroulante
+                                if ($requete) {
+                                    while ($donnees = $requete->fetch()) {
                                 ?>
-                                <option value=""></option>
+                                <option value="<?php echo $donnees['category_id']?>"><?php echo $result['name']?></option>
+                                <?php }
+                                }
+                                ?>
                             </select>
                         </td>
                     </tr>

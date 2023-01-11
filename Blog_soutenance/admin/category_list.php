@@ -35,19 +35,16 @@ include 'includes/sidebar.php';
                     <?php
                     $query = "SELECT * FROM  category ORDER BY category_id DESC ";
                     $category = $db->select($query);
-                    if ($category) 
+                    if ($category) {
                         $i = 0;
                         while ($result = $category->fetch_assoc()) {
-                            $i++
-                        }
-                ?>
-                    
+                            $i++;
                             
-
-                                    
-
+                        }
                         
-                    
+                    }
+                ?>  
+                   <?php 
                     // Récupérer toutes les catégories de la table category
                     // Tant que la catégorie est récupérée
                     //     Afficher la catégorie
