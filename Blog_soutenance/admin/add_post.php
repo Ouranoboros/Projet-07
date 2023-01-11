@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // Inclure le fichier header.php
 include 'includes/header.php';
 // Inclure le fichier sidebar.php
@@ -11,23 +11,11 @@ include 'includes/sidebar.php';
         <?php
         // Si la méthode de requête est POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        // Alors
-        //     Récupérer la valeur de title
-            $title = $format->validation($_POST['title']);
-        //     Récupérer la valeur de category_id
-            $category_id = $format->validation($_POST['category_id']);
-        //     Récupérer la valeur de author
-            $author = $format->validation($_POST['author']);
-        //     Récupérer la valeur de tags
-            $tags = $format->validation($_POST['tags']);
-        //     Récupérer la valeur de body
-            $body = $format->validation($_POST['body']);
-        //     Récupérer la valeur de image
-            $image = $format->validation($_POST['image']);
-
-
-
-
+            $title = $_POST['title'];
+            $category_id = $_POST['category_id'];
+            $author = $_POST['author'];
+            $tags = $_POST['tags'];
+            $body = $_POST['body'];
         //     Si title est vide
                 if ($title == "") {
         //         Alors
@@ -36,13 +24,13 @@ include 'includes/sidebar.php';
         //         Sinon
                  } else {
         //             Insérer le post dans la table post
-                    $query = "INSERT INTO post(title, category_id, author, tags, body, image) VALUES ('$title', '$category_id', '$author', '$tags', '$body', '$image')";
+                    $query = "INSERT INTO post(title, category_id, author, tags, body) VALUES ('$title', '$category_id', '$author', '$tags', '$body')";
                     $insert_post = $db->crate($query);
         //             Si le post est inséré
         //                 Alors
         //                     Afficher un message de succès
                     if ($insert_post) {
-                        echo "<span class='success'> Votre message à été envoyé.</span>";
+                        echo "<span class='success'>Votre Post à été envoyé.</span>";
         //                 Sinon
         //                     Afficher un message d'erreur
                     } else {
@@ -52,8 +40,7 @@ include 'includes/sidebar.php';
         }
 
         ?>
-        <div class="block">
-            <form action="" method="post" enctype="multipart/form-data">
+       <form action="" method="post" enctype="multipart/form-data">
                 <table class="form">
 
                     <tr>
@@ -74,17 +61,10 @@ include 'includes/sidebar.php';
                                 <option>Select Category </option>
                                 <?php
                                 // Récupérer les catégories de la table category
-                                $query = "SELECT * FROM category";
-                                $requete = $db->select($query);
                                 // Tant que les catégories sont récupérées
                                 //     Afficher les catégories dans la liste déroulante
-                                if ($requete) {
-                                    while ($donnees = $requete->fetch()) {
                                 ?>
-                                <option value="<?php echo $donnees['category_id']?>"><?php echo $result['name']?></option>
-                                <?php }
-                                }
-                                ?>
+                                <option value=""></option>
                             </select>
                         </td>
                     </tr>
@@ -102,7 +82,7 @@ include 'includes/sidebar.php';
                         </td>
                         <td>
                             <input type="text" name="author" placeholder="Entrez le nom de l'auteur." />
-                        </td>
+                            </td>
                     </tr>
                     <tr>
                         <td>
@@ -135,5 +115,5 @@ include 'includes/sidebar.php';
 <script src="js/tiny-mce/jquery.tinymce.js" type="text/javascript"></script>
 <?php
 // Inclure le fichier footer.php
-include 'includes/footer.php';
+include 'includes/footer.php'
 ?>
