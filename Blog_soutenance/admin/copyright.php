@@ -41,7 +41,7 @@ include 'includes/sidebar.php';
             <!--    For show social link from database-->
             <?php
             // Récupérer le copyright de la table footer
-
+            $copy = $query
             // Tant que le copyright est récupéré
 
             //     Afficher le copyright
