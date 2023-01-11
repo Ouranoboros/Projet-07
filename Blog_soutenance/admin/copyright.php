@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Inclure le fichier header.php
 include 'includes/header.php';
 // Inclure le fichier sidebar.php
@@ -15,45 +15,25 @@ include 'includes/sidebar.php';
         //     Récupérer la valeur de copyright
         $copyright = $format->validation($_POST['copyright']);
         //     Si copyright est vide
-        if ($copyright=""){
-        //         Alors
-<<<<<<< HEAD
-        //         Afficher un message d'erreur
-=======
-        //             Afficher un message d'erreur
->>>>>>> 4b9ad6044e15c8778cff32155a0770409c8d0b88
-            echo  "<script>alert('ERROR !');</script>";
-        //         Sinon
-        }
-        else{
-<<<<<<< HEAD
-            //      Mettre à jour le copyright dans la table footer
-            $query = "UPDATE footer SET copyright = '$copyright'";
-            $db->update($query);
-
-=======
-            $query = "UPDATE footer SET copyright = '$copyright'";
-            $db->update($query);
-
-        //           Mettre à jour le copyright dans la table footer
->>>>>>> 4b9ad6044e15c8778cff32155a0770409c8d0b88
-        //           Si le copyright est mis à jour
-
-
-        if(query($db)!=0) {
+            if (empty($copyright)){
+            //         Alors
+            //         Afficher un message d'erreur
+                echo  "<script>alert('ERROR !');</script>";
+            //         Sinon
+            } else{
+                //      Mettre à jour le copyright dans la table footer
+                $query = "UPDATE footer SET copyright = '$copyright'";
+                $result = $db->update($query);
             
-        //          Sinon
-        //          Afficher un message d'erreur
-            
+            //      Si le copyright est mis à jour
+                if(empty($copyright)!=true) {
+
+        } else{
+            //         Alors
+            //          Afficher un message d'erreur
             echo "marche pas";
-            
-            
-        }
-        else{
-        //         Alors
-        //         Afficher un message de succès
-            echo" marche bien";
-        }
+                }
+            }
         }
         ?>
 
@@ -65,8 +45,8 @@ include 'includes/sidebar.php';
             // Tant que le copyright est récupéré
 
             //     Afficher le copyright
-            
-    }
+
+    
             ?>
             <form action="" method="post">
                 <table class="form">
@@ -90,3 +70,4 @@ include 'includes/sidebar.php';
 // Inclure le fichier footer.php
 include 'includes/footer.php';
 ?>
+
