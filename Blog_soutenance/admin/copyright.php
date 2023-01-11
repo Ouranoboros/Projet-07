@@ -15,19 +15,34 @@ include 'includes/sidebar.php';
         //     Récupérer la valeur de copyright
         $copyright = $format->validation($_POST['copyright']);
         //     Si copyright est vide
-        if ($copyright="");{
+        if ($copyright=""){
         //         Alors
-        //             Afficher un message d'erreur
-            echo
+        //         Afficher un message d'erreur
+            echo  "<script>alert('ERROR !');</script>";
         //         Sinon
         }
-        else;{
-        //             Mettre à jour le copyright dans la table footer
-        //             Si le copyright est mis à jour
-        //                 Alors
-        //                     Afficher un message de succès
-        //                 Sinon
-        //                     Afficher un message d'erreur
+        else{
+            //      Mettre à jour le copyright dans la table footer
+            $query = "UPDATE footer SET copyright = '$copyright'";
+            $db->update($query);
+
+        //           Si le copyright est mis à jour
+
+
+        if(query($db)!=0) {
+            
+        //          Sinon
+        //          Afficher un message d'erreur
+            
+            echo "marche pas";
+            
+            
+        }
+        else{
+        //         Alors
+        //         Afficher un message de succès
+            echo" marche bien";
+        }
         }
         ?>
 
@@ -35,8 +50,11 @@ include 'includes/sidebar.php';
             <!--    For show social link from database-->
             <?php
             // Récupérer le copyright de la table footer
+
             // Tant que le copyright est récupéré
+
             //     Afficher le copyright
+            
     }
             ?>
             <form action="" method="post">
