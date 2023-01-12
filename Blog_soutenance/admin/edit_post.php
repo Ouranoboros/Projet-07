@@ -20,7 +20,7 @@ if (isset($_GET['edit_postid'])) {
 
 <div class="grid_10">
     <div class="box round first grid">
-        <h2>Ajouter un nouveau post</h2>
+        <h2>ZEBI un nouveau post</h2>
         <?php
         // Si la méthode de requête est POST
         // Alors
