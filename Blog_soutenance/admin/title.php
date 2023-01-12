@@ -49,7 +49,7 @@ include 'includes/sidebar.php';
         {
             //         Alors
             //             Afficher un message d'erreur
-            echo "<script>alert('Zebi c'est pas bon');</script>";
+            echo "<span class='success'>Vous n'avez pas entré de titre</span>";
         }
         //         Sinon
         else {
@@ -63,7 +63,7 @@ include 'includes/sidebar.php';
                 //                     Si le titre est mis à jour
                 //                         Alors
                 //                             Afficher un message de succès
-                echo "<script>alert('Titre modifié avec succès !')</script>";
+                echo "<span class='success'>Titre modifié avec succès</span>";
             }
             //                 Sinon
             else {
@@ -79,21 +79,20 @@ include 'includes/sidebar.php';
                     if ($logo_size < 1048567) {
                         //                                     Déplacer le logo dans le dossier uploads
                         //                                     Mettre à jour le titre et le logo dans la table title_slogan
-                        move_uploaded_file($logo['tmp_name'], "uploads/logo.png");
-
-                        $query = "UPDATE title SET logo = '$logo_name'";
+                        move_uploaded_file($logo['tmp_name'], "uploads/".$logo_name);
+                        
+                        $query = "UPDATE title SET logo = 'uploads/$logo_name', title = '$title'";
                         $db->update($query);
+
                         //                                     Si le titre et le logo sont mis à jour
                         echo "<span class='success'>Données modifiée avec succès</span>";
 
                     }
 
-
                 }
 
             }
         }
-
         }
         ?>
         <!--               For show blog title  & logo from database-->
@@ -133,7 +132,12 @@ include 'includes/sidebar.php';
                 </form>
             </div>
             <div class="right">
-                <img src="<?php echo "uploads/logo.png"  ?>" alt="logo">
+                <img src="<?php 
+                        $query = "SELECT * FROM title";
+                        $name = $db->select($query)->fetch_assoc()['logo'];
+                        echo "$name"; 
+
+                ?>" alt="logo">
             </div>
         </div>
     </div>

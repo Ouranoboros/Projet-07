@@ -35,12 +35,18 @@ include 'includes/sidebar.php';
                         <td><?php echo $donnees['id']; ?></td>
                         <td><?php echo $donnees['title']; ?></td>
                         <td><?php echo $donnees['body']; ?></td>
-                        <td><?php echo $donnees['category_id']; ?></td>
+                        <td><?php 
+                        $cat_id = $donnees['category_id'];
+                        $req = $db->select("SELECT * FROM category WHERE category_id = $cat_id");
+                        $req = $req->fetch_assoc()["name"];
+                        echo $req; 
+                        
+                        ?></td>
                         <td><img src="<?php echo $donnees['image']; ?>" height="40px" width="80px" alt=""></td>
                         <td><?php echo $donnees['author']; ?></td>
                         <td><?php echo $donnees['tags']; ?></td>
                         <td><?php echo $donnees['date']; ?></td>
-                        <td><a href="edit_post.php?edit_postid=">Modifier</a>
+                        <td><a href="edit_post.php?edit_postid=<?php echo $donnees['id']?>">Modifier</a>
                             || <a onclick="return confirm('Etes vous sur de vouloir supprimer ?')" href="delete_post.php?del_postid=">Supprimer</a></td>
                     </tr>
                     <?php 

@@ -4,128 +4,72 @@ include 'includes/header.php';
 // Inclure le fichier sidebar.php
 include 'includes/sidebar.php';
 ?>
-<?php
-// Si la méthode de requête est GET
-// Alors
-//     Récupérer la valeur de edit_postid
-if (isset($_GET['edit_postid'])) {  
-    $edit_postid = $_GET['edit_postid'];
-}  
-//     Si edit_postid est vide
-//         Alors
-//             Rediriger vers post_list.php
-//     Sinon
-//         Récupérer la valeur de id
-?>
-
 <div class="grid_10">
     <div class="box round first grid">
-        <h2>ZEBI un nouveau post</h2>
-        <?php
-        // Si la méthode de requête est POST
-        // Alors
-        //     Récupérer la valeur de title
-        //     Récupérer la valeur de category_id
-        //     Récupérer la valeur de author
-        //     Récupérer la valeur de tags
-        //     Récupérer la valeur de body
-        //     Récupérer la valeur de image
-        //     Si title est vide
-        //         Alors
-        //             Afficher un message d'erreur
-        //         Sinon
-        //             Insérer le post dans la table post
-        //             Si le post est inséré
-        //                 Alors
-        //                     Afficher un message de succès
-        //                 Sinon
-        //                     Afficher un message d'erreur
-        ?>
+        <h2>Post List</h2>
         <div class="block">
-            <?php
-            // Récupérer le post de la table post
-            // Tant que le post est récupéré
-            //     Afficher les valeurs de title, category_id, author, tags, body et image dans les champs correspondants
-            ?>
-            <form action="" method="post" enctype="multipart/form-data">
-                <table class="form">
+            <table class="data display datatable" id="example">
+                <thead>
+                    <tr>
+                        <th width="5%">SL No</th>
+                        <th width="13%">Titre du post</th>
+                        <th width="25%">azezaeaz</th>
+                        <th width="10%">Categorie</th>
+                        <th width="10%">Image</th>
+                        <th width="10%">Autheur</th>
+                        <th width="5%">Tags</th>
+                        <th width="10%">Date</th>
+                        <th width="12%"> Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    // Récupérer les données de la table post
+                    $query = "SELECT * FROM post";
+                    $requete = $db->select($query);
+                    if ($requete!='')
+                    {
+                    // Tant que les données sont récupérées
+                        while ($donnees = $requete->fetch_assoc()) {
+                        //     Afficher les données
+                        ?>
+                        <tr class="odd gradeX">
+                            <td><?php echo $donnees['id']; ?></td>
+                            <td><?php echo $donnees['title']; ?></td>
+                            <td><?php echo $donnees['body']; ?></td>
+                            <td><?php 
+                            $cat_id = $donnees['category_id'];
+                            $req = $db->select("SELECT * FROM category WHERE category_id = $cat_id");
+                            $req = $req->fetch_assoc()["name"];
+                            echo $req; 
+                            
+                            ?></td>
+                            <td><img src="<?php echo $donnees['image']; ?>" height="40px" width="80px" alt=""></td>
+                            <td><?php echo $donnees['author']; ?></td>
+                            <td><?php echo $donnees['tags']; ?></td>
+                            <td><?php echo $donnees['date']; ?></td>
+                            <td><a href="edit_post.php?edit_postid=<?php echo $donnees['id']?>">Modifier</a>
+                                || <a onclick="return confirm('Etes vous sur de vouloir supprimer ?')" href="delete_post.php?del_postid=<?php echo $donnees['id']?>">Supprimer</a></td>
+                        </tr>
+                        <?php 
+                        }
+                    }
+                    else {
+                        echo "<span class='success'>Il n'y a pas de posts</span>";
+                    }
+                    ?>
+                </tbody>
+            </table>
 
-                    <tr>
-                        <td>
-                            <label>Title</label>
-                        </td>
-                        <td>
-                            <input type="text" name="title" value="" class="medium" />
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label>Categories</label>
-                        </td>
-                        <td>
-                            <select id="select" name="category_id">
-                                <option>Selectionner une catégorie</option>
-                                <?php
-                                // Récupérer les catégories de la table category
-                                // Tant que les catégories sont récupérées
-                                //     Afficher les catégories dans la liste déroulante
-                                ?>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>Télécharger une image</label>
-                        </td>
-                        <td>
-                            <img src="" height="60px" width="100px" alt="">
-                            <input type="file" name="image" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>Nom de l'auteur</label>
-                        </td>
-                        <td>
-                            <input type="text" name="author" value="" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>Tags</label>
-                        </td>
-                        <td>
-                            <input type="text" name="tags" value="" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="vertical-align: top; padding-top: 9px;">
-                            <label>Contenu</label>
-                        </td>
-                        <td>
-                            <textarea class="tinymce" name="body"></textarea>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <input type="submit" name="submit" Value="Sauvegarder" />
-                        </td>
-                    </tr>
-                </table>
-            </form>
         </div>
     </div>
 </div>
-<!-- Load TinyMCE -->
-<script src="js/tiny-mce/jquery.tinymce.js" type="text/javascript"></script>
+
 <script type="text/javascript">
     $(document).ready(function() {
-        setupTinyMCE();
-        setDatePicker('date-picker');
-        $('input[type="checkbox"]').fancybutton();
-        $('input[type="radio"]').fancybutton();
+        setupLeftMenu();
+        $('.datatable').dataTable();
+        setSidebarHeight();
     });
 </script>
 <?php
