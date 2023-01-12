@@ -11,7 +11,7 @@ include 'includes/sidebar.php';
         if (isset($_GET['delid'])) {  // Si la méthode de requête est GET
             $delid = $_GET['delid'];  //     Récupérer la valeur de delid
             $delete_query = "DELETE FROM category WHERE category_id= '$delid'";   //     Supprimer la catégorie de la table category
-            $delete_data = $db->delete($delete_quey);
+            $delete_data = $db->delete($delete_query);
             if ($delete_data) {   //     Si la catégorie est supprimée  // Alors
                 echo "<span style='color:green;font-size:18px;'>Catégorie supprimée avec succès</span>";  //  Afficher un message de succès
             } else {

@@ -36,7 +36,7 @@ include 'includes/sidebar.php';
 
         }
         else{
-            echo "<span style='color:green;font-size:18px;'>Les champs sélectionnés ont bien été mit à jour</span> <br>";
+            echo "<span style='color:green;font-size:18px;'>Les champs sélectionnés ont bien été mis à jour</span> <br>";
         }
         //             Mettre à jour les médias sociaux dans la table tbl_social
         //             Si les médias sociaux sont mis à jour

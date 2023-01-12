@@ -47,7 +47,7 @@ include 'includes/sidebar.php';
                         <td><?php echo $donnees['tags']; ?></td>
                         <td><?php echo $donnees['date']; ?></td>
                         <td><a href="edit_post.php?edit_postid=<?php echo $donnees['id']?>">Modifier</a>
-                            || <a onclick="return confirm('Etes vous sur de vouloir supprimer ?')" href="delete_post.php?del_postid=">Supprimer</a></td>
+                            || <a onclick="return confirm('Etes vous sur de vouloir supprimer ?')" href="delete_post.php?del_postid=<?php echo $donnees['id'];?>">Supprimer</a></td>
                     </tr>
                     <?php 
                     }
