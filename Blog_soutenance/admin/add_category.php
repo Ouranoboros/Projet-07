@@ -13,12 +13,14 @@ include 'includes/sidebar.php';
 
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $name = $format->validation($_POST['name']);
+                $name = mysqli_real_escape_string($db->link, $name);
 
                 if ($name == '') {
-                    echo "Un titre doit être renseigné pour creer un post !";
+                    echo "<span style='color:red;font-size:18px;>-'Un titre doit être renseigné pour creer un post !</span> <br>";
                 } else {
                     $query = "INSERT INTO category(category_id, name) VALUES(NULL, '$name')";
                     $event = $db->crate($query);
+                        echo "<span style='color:green;font-size:18px;'>- Tu as bien ajouté une catégorie</span> <br>";
                 }
             }
 
