@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // Inclure le fichier header.php
 include 'includes/header.php';
 // Inclure le fichier sidebar.php
@@ -10,19 +10,25 @@ include 'includes/sidebar.php';
         <h2>Ajouter une nouvelle catégorie</h2>
         <div class="block copyblock">
             <?php
-            // Si la méthode de requête est POST
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {// Si la méthode de requête est POST
             // Alors
-            //     Récupérer la valeur de name
-            //     Si name est vide
+            $name = $_POST['name'];//     Récupérer la valeur de name
+            if ($name == "") { //     Si name est vide
             //         Alors
-            //             Afficher un message d'erreur
-            //         Sinon
-            //             Insérer la catégorie dans la table category
-            //             Si la catégorie est insérée
-            //                 Alors
-            //                     Afficher un message de succès
-            //                 Sinon
-            //                     Afficher un message d'erreur
+            echo "<span class='error'> ERROR !.</span>"; //             Afficher un message d'erreur
+            }else{ //         Sinon
+                $query = "INSERT INTO category(title, category_id, author, tags, body) VALUES ('')";
+                $insert_category = $db->crate($query);//             Insérer la catégorie dans la table category
+            }
+            if ($insert_post) { //             Si la catégorie est insérée
+            //   Alors
+            echo "<span class='success'>VCatégorie ajoutée.</span>";//                     Afficher un message de succès
+            }else{//                 Sinon
+                echo "<span class='error'> La catégorie n'a pas pu être ajoutée.</span>";//                     Afficher un message d'erreur
+            }
+        }
+                
+        
             ?>
             <form method="post">
                 <table class="form">
