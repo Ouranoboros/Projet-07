@@ -13,14 +13,20 @@ include 'includes/sidebar.php';
 
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $name = $format->validation($_POST['name']);
-
+                $name = mysqli_real_escape_string($db->link, $name);
                 if ($name == '') {
-                    echo "Un titre doit être renseigné pour creer un post !";
+                echo "<span class='error'> Un champ n'est pas renseigné.</span>";
                 } else {
                     $query = "INSERT INTO category(category_id, name) VALUES(NULL, '$name')";
                     $event = $db->crate($query);
-                }
+                    if ($event) {
+                        echo "<span class='success'> Votre message à été envoyé.</span>";
+                    } else {
+                        echo "<span class='error'> Votre message n'a pas été envoyé.</span>";
+                    }
+                }    
             }
+    
 
             // Si la méthode de requête est POST
             // Alors
