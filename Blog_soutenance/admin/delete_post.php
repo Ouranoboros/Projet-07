@@ -29,17 +29,19 @@ $requete = $db->select($query);
 while ($donnees = $requete->fetch()) {
 
 }
+
 $imglink = $_GET['imglink']; //   Récupérer la valeur de imglink
-//   Supprimer l'image
-// "DELETE FROM nom de table"  ->Supprimer les données de la table post
-// if // Si les données sont supprimées
-//   Alors
-echo "<span style='color:red;front-size:18px;'>Données supprimées</span>";  //   Afficher un message de succès
+unlink('../images' . $imglink);    //   Supprimer l'image
+$delete_query = "DELETE * FROM post";  //->Supprimer les données de la table post                                      
+if ($delete_query){                  { // Si les données sont supprimées
+echo "<span style='color:red;front-size:18px;'>Données de la table supprimées</span>";  //   Afficher un message de succès
+}
+}
 header("Location: .$post_list.php");                  //    Rediriger vers post_list.php
 die();
-// else //   Sinon
+ else{ //   Sinon
 echo  "<span style='color:red;front-size:18px;'>ERROR !</span>";  //    Afficher un message d'erreur
-
+ }
 
 header("Location: .$post_list.php");   //  Rediriger vers post_list.php
 die();
