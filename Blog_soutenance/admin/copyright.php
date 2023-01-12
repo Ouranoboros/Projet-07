@@ -14,11 +14,12 @@ include 'includes/sidebar.php';
         // Alors
         //     Récupérer la valeur de copyright
         $copyright = $format->validation($_POST['copyright']);
+        $copyright = mysqli_real_escape_string($db->link, $copyright);
         //     Si copyright est vide
             if (empty($copyright)){
             //         Alors
             //         Afficher un message d'erreur
-                echo  "<script>alert('ERROR !');</script>";
+                echo "<span class='error'> Le champ est vide.</span>";
             //         Sinon
             } else{
                 //      Mettre à jour le copyright dans la table footer
@@ -27,10 +28,11 @@ include 'includes/sidebar.php';
             
             //      Si le copyright est mis à jour
                 if(empty($copyright)!=true) {
-        } else{
+                    echo "<span class='success'>Le Copyright a été changé.</span>";//
+                } else{
             //         Alors
             //          Afficher un message d'erreur
-            echo "marche pas";
+                    echo "<span class='error'> Le Copyright n'a pas été changé.</span>";
                 }
             }
         }

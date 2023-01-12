@@ -31,7 +31,8 @@ include 'includes/sidebar.php';
         //         Alors
         //             Afficher un message d'erreur
         //         Sinon
-        // jonathan le roi a dit pas comme ca zinedine if (empty($facebook or $github or $skype or $linkedin or $google )){echo "Un champ est vide attention step bro";
+       if (empty($facebook or $github or $skype or $linkedin or $google ))
+       {echo "Un champ est vide attention step bro";
 
         }
         //             Mettre à jour les médias sociaux dans la table tbl_social
@@ -94,10 +95,9 @@ include 'includes/sidebar.php';
             $result = $db->update($query);
         }
         else{
-        
             echo "<span style='color:red;font-size:18px;'> - Attention : le champ google est vide</span> <br>";
-   
             }
+        }
 
         ?>
 

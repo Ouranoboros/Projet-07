@@ -22,7 +22,7 @@ include 'includes/sidebar.php';
             }
             if ($insert_post) { //             Si la catégorie est insérée
             //   Alors
-            echo "<span class='success'>VCatégorie ajoutée.</span>";//                     Afficher un message de succès
+            echo "<span class='success'>Catégorie ajoutée.</span>";//                     Afficher un message de succès
             }else{//                 Sinon
                 echo "<span class='error'> La catégorie n'a pas pu être ajoutée.</span>";//                     Afficher un message d'erreur
             }
