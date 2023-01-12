@@ -13,14 +13,11 @@ include 'includes/sidebar.php';
             $delete_query = "DELETE FROM category WHERE category_id= '$delid'";   //     Supprimer la catégorie de la table category
             $delete_data = $db->delete($delete_quey);
             if ($delete_data) {   //     Si la catégorie est supprimée  // Alors
-                echo "<span style='color:green;font-size:18px;'>
-                Catégorie supprimée avec succès</span>";  //  Afficher un message de succès
+                echo "<span style='color:green;font-size:18px;'>Catégorie supprimée avec succès</span>";  //  Afficher un message de succès
             } else {
                 echo "<span style='color:red;front-size:18px;'>Catégorie non supprimée</span>";  //  Afficher un message d'erreur
-        
             }
         }
-        
         ?>
         <div class="block">
             <table class="data display datatable" id="example">
@@ -33,30 +30,26 @@ include 'includes/sidebar.php';
                 </thead>
                 <tbody>
                     <?php
+                    // Récupérer toutes les catégories de la table category
                     $query = "SELECT * FROM  category ORDER BY category_id DESC ";
                     $category = $db->select($query);
                     if ($category) {
+                    // Tant que la catégorie est récupérée
+                    //     Afficher la catégorie
                         $i = 0;
                         while ($result = $category->fetch_assoc()) {
                             $i++;
-                            
-                        }
-                        
-                    }
-                ?>  
-                   <?php 
-                    // Récupérer toutes les catégories de la table category
-                    // Tant que la catégorie est récupérée
-                    //     Afficher la catégorie
-                    ?>
+                    ?>  
                     <tr class="odd gradeX">
-                        <td><?php echo $i; ?></td>
-                            
-                
+                        <td><?php echo $i; ?></td>              
                         <td><?php echo $result['name']; ?></td>
                         <td><a href="edit_category.php?catid=<?php echo $result['category_id']; ?>">Modifier</a>
                             || <a onclick="return confirm('Êtes-vous sûr de vouloir supprimer?')" href="?delid=<?php echo $result['category_id']; ?>">Supprimer</a></td>
                     </tr>
+                    <?php
+                        }  
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>
