@@ -32,6 +32,8 @@ include 'includes/sidebar.php';
             $file_name = $_FILES['image']['name'];
             $file_size = $_FILES['image']['size'];
             $file_temp = $_FILES['image']['tmp_name'];
+            // tmp_name = donne le nom du fichier stocké dans l'espace de stockage du serveur web
+
             // Divise une chaine de caractères
             $div = explode('.', $file_name);
             // Met en miniscule le dernier segment de $div (l'extension)
@@ -46,17 +48,17 @@ include 'includes/sidebar.php';
         //             Afficher un message d'erreur
                     echo "<span class='error'> Un champ n'est pas renseigné.</span>";
         //         Verifie la taille de l'image   
-                } elseif ($file_size > 104867) { 
+                } elseif ($file_size > 1048567) { 
                     echo "<span class='error'> La taille de l'image doit être inférieur à 1Mo.</span>";
         //         Verifie l'extension de l'image / implode = rassemble les éléments d'un tableau en une chaîne    
-                } elseif (in_array($file_ext, $permited == false)) { 
+                } elseif (in_array($file_ext, $permited)== false) { 
                     echo "<span class='error'> Vous ne pouvez télécharger que :-" . implode(',' , $permited) . "</span>";
         //         Sinon
                 } else {
         //             Télécharger l'image
                     move_uploaded_file($file_temp, $uploaded_image);
         //             Insérer le post dans la table post
-                    $query = "INSERT INTO post(title, category_id, author, tags, body, image) VALUES ('$title', '$category_id', '$author', '$tags', '$body', '$image')";
+                    $query = "INSERT INTO post(title, category_id, author, tags, body, image) VALUES ('$title', '$category_id', '$author', '$tags', '$body', '$uploaded_image')";
                     $insert_post = $db->crate($query);
         //             Si le post est inséré
         //                 Alors
@@ -89,21 +91,20 @@ include 'includes/sidebar.php';
                         </td>
                         <td>
                             <select id="select" name="category_id">
-                                <option>Select Category </option>
+                                <option value ="">Select Category </option>
                                 <?php
                                 // Récupérer les catégories de la table category
                                 $query = "SELECT * FROM category";
                                 $requete = $db->select($query);
                                 // Tant que les catégories sont récupérées
-                                //     Afficher les catégories dans la liste déroulante
+                                //     Afficher les catégories dans la liste déroulante 
                                 if ($requete) {
-                                    while ($donnees = $requete->fetch()) {
+                                    while ($donnees = $requete->fetch_assoc()) {
                                 ?>
-                                <option value="<?php echo $donnees['category_id']?>"><?php echo $result['name']?></option>
+                                <option value="<?php echo $donnees['category_id']?>"><?php echo $donnees['name']?></option>
                                 <?php }
                                 }
-                                ?>
-                                <option value=""></option>
+                                ?> 
                             </select>
                         </td>
                     </tr>

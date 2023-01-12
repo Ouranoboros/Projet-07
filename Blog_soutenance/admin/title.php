@@ -39,76 +39,63 @@ include 'includes/sidebar.php';
         $logo_name = $logo['name'];
         $logo_size = $logo['size']; 
         $logo_type = $logo['type']; 
-
+        $div = explode('.', $logo_name);
+        $file_ext = strtolower(end($div));
         //     Si title est vide
         //$logo = gettype($logo);
         //echo "<script>alert('$logo')</script>";
 
-            if ($title == '')
+        if ($title == '')
+        {
+            //         Alors
+            //             Afficher un message d'erreur
+            echo "<script>alert('Zebi c'est pas bon');</script>";
+        }
+        //         Sinon
+        else {
+            //             Si logo est vide
+            if ($logo_name == '')
             {
-                //         Alors
-                //             Afficher un message d'erreur
-                echo "<span style='color:red;font-size:18px;'> - Attention : Vous n'avez pas mit de titre</span> <br>";
-   
+                //                 Alors
+                //                     Mettre à jour le titre dans la table title
+                $query = "UPDATE title SET title = '$title'";
+                $db->update($query);
+                //                     Si le titre est mis à jour
+                //                         Alors
+                //                             Afficher un message de succès
+                echo "<script>alert('Titre modifié avec succès !')</script>";
             }
-            //         Sinon
+            //                 Sinon
             else {
-                //             Si logo est vide
-                if ($logo_name == '')
-                {
-                    //          Alors
-                    //          Mettre à jour le titre dans la table title
-                    $query = "UPDATE title SET title = '$title'";
-                    //          Si le titre est mis à jour
-                    //                         Alors
-                    //                             Afficher un message de succès
-                    $db = $db->update($query);
-                    if ($db){
-                        echo "<span style='color:red;font-size:18px;'> - Titre modifié avec succès !</span> <br>";
-   
-                    } else {
-                        //                         Sinon
-                        //                             Afficher un message d'erreur
-                        echo "alert('Non')";
-                    }    
-
-                }  else{
-                        //                     Si l'extension du logo est permise
-                        echo "('logo_size')";
-
-                        if (getimagesize($logo['tmp_name']))
-                        {
-                            //                         Alors
-                            //                             Si la taille du logo est inférieure à 1 Mo
-                            echo "('$logo_size')";
-            
-                            //                                 Alors
-            
-                        }
-                    }
-                    
                 
+                $permitted = array('png','jpg','gif');
+                
+                //                     Si l'extension du logo est permise
+                //                         Alors
+                //                             Si la taille du logo est inférieure à 1 Mo
+                if (in_array($file_ext,$permitted)==1) {
+                    //                                 Alors
+                    //                                         Alors
+                    if ($logo_size < 1048567) {
+                        //                                     Déplacer le logo dans le dossier uploads
+                        //                                     Mettre à jour le titre et le logo dans la table title_slogan
+                        move_uploaded_file($logo['tmp_name'], "uploads/logo.png");
+
+                        $query = "UPDATE title SET logo = '$logo_name'";
+                        $db->update($query);
+                        //                                     Si le titre et le logo sont mis à jour
+                        echo "<span class='success'>Données modifiée avec succès</span>";
+
+                    }
+
+
+                }
+
             }
-        
-        //                 Sinon
-    }
-        //                                     Déplacer le logo dans le dossier uploads
-        //                                     Mettre à jour le titre et le logo dans la table title_slogan
-        //                                     Si le titre et le logo sont mis à jour
-        //                                         Alors
-        //                                             Afficher un message de succès
-        //                                         Sinon
-        //                                             Afficher un message d'erreur
-        //                                 Sinon
-        //                                     Afficher un message d'erreur
-        //                             Sinon
-        //                                 Afficher un message d'erreur
-        //                     Sinon
-        //                         Afficher un message d'erreur
-        
+        }
+
+        }
         ?>
-
-
         <!--               For show blog title  & logo from database-->
         <?php
         // Récupérer les données de la table title_slogan
@@ -146,7 +133,7 @@ include 'includes/sidebar.php';
                 </form>
             </div>
             <div class="right">
-                <img src="" alt="logo">
+                <img src="<?php echo "uploads/logo.png"  ?>" alt="logo">
             </div>
         </div>
     </div>
